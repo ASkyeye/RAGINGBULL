@@ -5,11 +5,19 @@ segment .text$A
 
 EnterKmMode:
 	%ifidn __OUTPUT_FORMAT__, win32
-		incbin	'source/asm/get_pos.x86.bin'	
+		call	Next
+	Next:
+		pop	eax
+		sub	eax, 5
+
 		push	ebp
 		mov	ebp, esp
 	%else
-		incbin	'source/asm/get_pos.x64.bin'
+		call	Next
+	Next:
+		pop	rax
+		sub	rax, 5
+
 		push	rsi
 		mov	rsi, rsp
 		and	rsp, 0FFFFFFFFFFFFFFF0h
